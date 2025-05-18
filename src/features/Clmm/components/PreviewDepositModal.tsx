@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { ApiV3PoolInfoConcentratedItem } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoConcentratedItem } from 'stacc-sdk-v2'
 import {
   Box,
   Flex,

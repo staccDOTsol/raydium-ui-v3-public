@@ -1,7 +1,7 @@
 import { TagsOf, UnionOf, ofType, unionize } from 'unionize'
 import { LaunchpadConfigInfo, LaunchpadPoolInfo } from '@/hooks/launchpad/usePoolRpcInfo'
 import { MintInfo } from '@/features/Launchpad/type'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 import { ConfigApiData } from '@/hooks/launchpad/useConfigs'
 import { CreateMintAdvanceConfig } from '@/store'
 import { Point } from '@/features/Launchpad/components/Charts/CurveAreaChart'

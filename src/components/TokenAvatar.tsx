@@ -1,6 +1,6 @@
 import { AvatarProps, Box, Image, forwardRef, useColorMode } from '@chakra-ui/react'
 import { useMemo, useState, useEffect } from 'react'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 import { colors } from '@/theme/cssVariables'
 import useTokenInfo from '@/hooks/token/useTokenInfo'
 

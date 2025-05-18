@@ -23,7 +23,7 @@ import { listContext } from '@/components/List'
 import Curve from '@/icons/misc/Curve'
 import { getImgProxyUrl } from '@/utils/url'
 import useResponsive from '@/hooks/useResponsive'
-import { LaunchpadPoolInitParam } from '@raydium-io/raydium-sdk-v2'
+import { LaunchpadPoolInitParam } from 'stacc-sdk-v2'
 import { motion } from 'framer-motion'
 
 const HEATING_RATE = 33.3

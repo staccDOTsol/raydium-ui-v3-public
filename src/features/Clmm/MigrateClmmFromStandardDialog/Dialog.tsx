@@ -29,7 +29,7 @@ import {
   PoolFetchType,
   TickUtils,
   getLiquidityFromAmounts
-} from '@raydium-io/raydium-sdk-v2'
+} from 'stacc-sdk-v2'
 import { useEffect, useRef, useState } from 'react'
 
 import { useAppStore, useClmmStore, useLiquidityStore } from '@/store'

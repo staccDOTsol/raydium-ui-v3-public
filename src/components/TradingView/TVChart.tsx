@@ -24,7 +24,7 @@ import { isEmpty } from 'lodash'
 import axiosInstance from '@/api/axios'
 import { Subject } from 'rxjs'
 import { MintInfo } from '@/features/Launchpad/type'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 
 export const refreshChartSubject = new Subject<string>()
 const isIFrame = (element: HTMLElement | null): element is HTMLIFrameElement => element !== null && element.tagName === 'IFRAME'

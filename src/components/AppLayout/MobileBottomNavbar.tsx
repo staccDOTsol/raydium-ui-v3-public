@@ -1,16 +1,12 @@
-import { Box, ColorMode, Menu, MenuButton, SimpleGrid, Text, VStack, useColorMode } from '@chakra-ui/react'
+import { Box, ColorMode, SimpleGrid, Text, VStack, useColorMode } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 
 import LiquidityPageThumbnailIcon from '@/icons/pageNavigation/LiquidityPageThumbnailIcon'
-import MorePageThumbnailIcon from '@/icons/pageNavigation/MoreThumbnailIcon'
 import PortfolioPageThumbnailIcon from '@/icons/pageNavigation/PortfolioPageThumbnailIcon'
-import PerpetualsPageThumbnailIcon from '@/icons/pageNavigation/PerpetualsPageThumbnailIcon'
 import SwapPageThumbnailIcon from '@/icons/pageNavigation/SwapPageThumbnailIcon'
-import LaunchpadPageThumbnailIcon from '@/icons/pageNavigation/LaunchpadPageThumbnailIcon'
 import { colors } from '@/theme/cssVariables'
-import { NavMoreButtonMenuPanel } from './components/NavMoreButtonMenuPanel'
 import { shrinkToValue } from '@/utils/shrinkToValue'
 import { useTranslation } from 'react-i18next'
 
@@ -26,9 +22,6 @@ export function MobileBottomNavbar() {
   const isLiquidityActive = pathname === liquidityHref
   const protfolioHref = '/portfolio'
   const isPortfolioActive = pathname === protfolioHref
-  const launchpadHref = '/launchpad'
-  const isLaunchpadActive = pathname.includes(launchpadHref)
-  const isMoreActive = pathname === '/staking'
 
   return (
     <SimpleGrid
@@ -51,35 +44,13 @@ export function MobileBottomNavbar() {
         text={t('liquidity.title')}
         icon={(colorMode) => <LiquidityPageThumbnailIcon colorMode={colorMode} isActive={isLiquidityActive} />}
         isActive={isLiquidityActive}
-      />
+      /> 
       <BottomNavbarItem
         href={protfolioHref}
         text={t('portfolio.title')}
         icon={(colorMode) => <PortfolioPageThumbnailIcon colorMode={colorMode} isActive={isPortfolioActive} />}
         isActive={isPortfolioActive}
       />
-      <BottomNavbarItem
-        href="https://perps.raydium.io"
-        text={t('perpetuals.title')}
-        icon={(colorMode) => <PerpetualsPageThumbnailIcon colorMode={colorMode} isActive={false} />}
-        isActive={false}
-      />
-      <BottomNavbarItem
-        href={launchpadHref}
-        text={t('launchpad.title')}
-        icon={(colorMode) => <LaunchpadPageThumbnailIcon colorMode={colorMode} isActive={isLaunchpadActive} />}
-        isActive={isLaunchpadActive}
-      />
-      <Menu size="lg" placement="top-end" offset={[0, 30]} /* make menu popup higher */>
-        <MenuButton as="div">
-          <BottomNavbarItem
-            text={t('common.nav_text_more')}
-            icon={(colorMode) => <MorePageThumbnailIcon colorMode={colorMode} isActive={isMoreActive} />}
-            isActive={isMoreActive}
-          />
-        </MenuButton>
-        <NavMoreButtonMenuPanel />
-      </Menu>
     </SimpleGrid>
   )
 }

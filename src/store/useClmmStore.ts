@@ -20,7 +20,7 @@ import {
   TxVersion,
   getTransferAmountFeeV2,
   ClmmLockAddress
-} from '@raydium-io/raydium-sdk-v2'
+} from 'stacc-sdk-v2'
 import { PublicKey } from '@solana/web3.js'
 import createStore from '@/store/createStore'
 import { useAppStore, useTokenAccountStore, useLiquidityStore } from '@/store'
@@ -460,8 +460,8 @@ export const useClmmStore = createStore<ClmmState>(
         )
       ]
       const epochInfo = await getEpochInfo()
-      const { fee: feeA = new BN(0) } = getTransferAmountFeeV2(_amountMinA, poolInfo.mintA.extensions.feeConfig, epochInfo!, false)
-      const { fee: feeB = new BN(0) } = getTransferAmountFeeV2(_amountMinB, poolInfo.mintB.extensions.feeConfig, epochInfo!, false)
+      const feeB = new BN(100_000)
+      const feeA = new BN(100_000)
 
       try {
         const computeBudgetConfig = await getComputeBudgetConfig()

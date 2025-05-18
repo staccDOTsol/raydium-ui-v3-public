@@ -89,7 +89,7 @@ export default function PoolListItem({
   }, [isMobile, onPoolDetailOpen])
 
   const onClickDeposit = useCallback(() => {
-    const isStandard = pool.type === 'Standard'
+    const isStandard = pool.type.toLowerCase() === 'standard'
     router.push({
       pathname: isStandard ? '/liquidity/increase' : '/clmm/create-position',
       query: {
@@ -296,7 +296,7 @@ export default function PoolListItem({
               <Desktop>
                 {/* Reward stack */}
                 <Flex>
-                  {pool.weeklyRewards.map((reward, idx) => {
+                  {pool.weeklyRewards?.map((reward, idx) => {
                     return (
                       <TokenAvatar
                         size={['sm', 'smi', 'md']}
@@ -560,7 +560,7 @@ export default function PoolListItem({
                       {formatToRawLocaleStr(toAPRPercent(timeData.apr))}
                     </Text>
                     <HStack ml={1} spacing={'-7%'}>
-                      {pool.weeklyRewards.map((reward, idx) => (
+                      {pool.weeklyRewards?.map((reward, idx) => (
                         <TokenAvatar key={`pool-list-item-reward-${idx}`} token={reward.token} size="xs" />
                       ))}
                     </HStack>

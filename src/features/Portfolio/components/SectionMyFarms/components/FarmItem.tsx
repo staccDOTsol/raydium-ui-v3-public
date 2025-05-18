@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Badge, Box, Flex, HStack, Text, useClipboard, useDisclosure, Tag } from '@chakra-ui/react'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 
 import Button from '@/components/Button'
 import { Desktop, Mobile } from '@/components/MobileDesktop'

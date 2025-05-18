@@ -1,7 +1,7 @@
 import ChevronDownIcon from '@/icons/misc/ChevronDownIcon'
 import { colors } from '@/theme/cssVariables'
 import { Flex, HStack, Spacer, StyleProps, Text, useDisclosure } from '@chakra-ui/react'
-import { TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { TokenInfo } from 'stacc-sdk-v2'
 import { ReactNode, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import TokenAvatar from './TokenAvatar'

@@ -6,7 +6,7 @@ import {
   LOOKUP_TABLE_CACHE,
   CreatePoolAddress,
   MarketExtInfo
-} from '@raydium-io/raydium-sdk-v2'
+} from 'stacc-sdk-v2'
 import { PublicKey, Transaction, VersionedTransaction, TransactionMessage, SystemProgram } from '@solana/web3.js'
 import { TOKEN_2022_PROGRAM_ID } from '@solana/spl-token'
 import { useAppStore, useTokenAccountStore, useTokenStore } from './'

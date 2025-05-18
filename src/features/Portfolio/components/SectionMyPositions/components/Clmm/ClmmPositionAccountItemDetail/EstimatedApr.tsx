@@ -1,4 +1,4 @@
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 import Tabs from '@/components/Tabs'
 import { aprColors } from '@/features/Pools/components/PoolListItemAprLine'
 import { AprKey, TimeAprData, TimeBasisOptionType, timeBasisOptions } from '@/hooks/pool/type'

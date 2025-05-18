@@ -1,4 +1,4 @@
-import { ApiV3PoolInfoConcentratedItem } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoConcentratedItem } from 'stacc-sdk-v2'
 import { AprKey } from '@/hooks/pool/type'
 import useTokenPrice from '@/hooks/token/useTokenPrice'
 import BN from 'bn.js'

@@ -12,7 +12,7 @@ import { toAPRPercent } from '@/features/Pools/util'
 import useTokenPrice from '@/hooks/token/useTokenPrice'
 import { FarmBalanceInfo } from '@/hooks/farm/type'
 import Decimal from 'decimal.js'
-import { ApiV3Token, ApiV3PoolInfoConcentratedItem, PoolFetchType } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, ApiV3PoolInfoConcentratedItem, PoolFetchType } from 'stacc-sdk-v2'
 import { Desktop, Mobile } from '@/components/MobileDesktop'
 
 /** subItem of standard Pool */

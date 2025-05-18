@@ -22,7 +22,7 @@ import WarningIcon from '@/icons/misc/WarningIcon'
 import { LockCpmmPoolInfo } from '@/hooks/portfolio/cpmm/useLockableCpmmLp'
 import { formatCurrency } from '@/utils/numberish/formatter'
 import { useTokenAccountStore } from '@/store'
-import { ApiV3PoolInfoStandardItemCpmm } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoStandardItemCpmm } from 'stacc-sdk-v2'
 import BN from 'bn.js'
 
 function LiquidityLockModal({

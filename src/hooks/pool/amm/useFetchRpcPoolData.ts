@@ -1,5 +1,5 @@
 import { Connection } from '@solana/web3.js'
-import { fetchMultipleInfo, AmmV4Keys, AmmV5Keys } from '@raydium-io/raydium-sdk-v2'
+import { fetchMultipleInfo, AmmV4Keys, AmmV5Keys } from 'stacc-sdk-v2'
 import { useAppStore } from '@/store'
 import { MINUTE_MILLISECONDS } from '@/utils/date'
 import useSWR from 'swr'

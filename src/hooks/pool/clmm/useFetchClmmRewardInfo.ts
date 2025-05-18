@@ -7,7 +7,7 @@ import {
   ApiV3PoolInfoConcentratedItem,
   U64_IGNORE_RANGE,
   ApiV3Token
-} from '@raydium-io/raydium-sdk-v2'
+} from 'stacc-sdk-v2'
 import { AccountInfo } from '@solana/web3.js'
 import useTokenPrice from '@/hooks/token/useTokenPrice'
 import useSubscribeClmmInfo, { RpcPoolData } from './useSubscribeClmmInfo'
@@ -39,7 +39,7 @@ export default function useFetchClmmRewardInfo({
   shouldFetch = true
 }: Props) {
   const { data: tokenPrices } = useTokenPrice({
-    mintList: [poolInfo?.mintA.address, poolInfo?.mintB.address, ...(poolInfo?.rewardDefaultInfos.map((r) => r.mint.address) || [])]
+    mintList: [poolInfo?.mintA.address, poolInfo?.mintB.address, ...(poolInfo?.rewardDefaultInfos?.map((r) => r.mint.address) || [])]
   })
 
   const [tokenFees, setTokenFees] = useState<{ tokenFeeAmountA?: BN; tokenFeeAmountB?: BN }>({})
@@ -86,7 +86,7 @@ export default function useFetchClmmRewardInfo({
 
     const totalRewards = rewardInfos
       .map((r, idx) => {
-        const rewardMint = poolInfo.rewardDefaultInfos.find(
+        const rewardMint = poolInfo.rewardDefaultInfos?.find(
           (r) => r.mint.address === rpcPoolData.rewardInfos[idx].tokenMint.toBase58()
         )?.mint
         if (!rewardMint) return '0'
@@ -119,10 +119,10 @@ export default function useFetchClmmRewardInfo({
     if (!poolInfo || !rpcPoolData) return []
     const rewardToken = rewards
       .map((r, idx) => {
-        const rewardMint = poolInfo.rewardDefaultInfos.find(
+        const rewardMint = poolInfo.rewardDefaultInfos?.find(
           (r) => r.mint.address === rpcPoolData.rewardInfos[idx].tokenMint.toBase58()
         )?.mint
-        // const rewardMint = poolInfo.rewardDefaultInfos[idx]?.mint
+        // const rewardMint = poolInfo.rewardDefaultInfos?.[idx]?.mint
         const amount = new Decimal(r?.toString() || 0).div(10 ** (rewardMint?.decimals ?? 0))
         return {
           mint: rewardMint,

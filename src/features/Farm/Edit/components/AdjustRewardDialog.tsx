@@ -16,7 +16,7 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react'
-import { ApiV3Token, wSolToSolToken } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, wSolToSolToken } from 'stacc-sdk-v2'
 import Button from '@/components/Button'
 import CalloutNote from '@/components/CalloutNote'
 import DecimalInput from '@/components/DecimalInput'

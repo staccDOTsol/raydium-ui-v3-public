@@ -1,5 +1,5 @@
 import { Box, Flex, HStack, Spacer, Text, VStack } from '@chakra-ui/react'
-import { ApiV3PoolInfoItem, solToWSol } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoItem, solToWSol } from 'stacc-sdk-v2'
 
 import Button from '@/components/Button'
 import EditIcon from '@/icons/misc/EditIcon'

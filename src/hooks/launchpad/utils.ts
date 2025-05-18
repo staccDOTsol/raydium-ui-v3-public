@@ -1,4 +1,4 @@
-import { LaunchpadConfigInfo } from '@raydium-io/raydium-sdk-v2'
+import { LaunchpadConfigInfo } from 'stacc-sdk-v2'
 import { Comment } from './type'
 import { MintInfo } from '@/features/Launchpad/type'
 import ToPublicKey from '@/utils/publicKey'

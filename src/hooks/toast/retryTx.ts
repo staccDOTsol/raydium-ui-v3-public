@@ -3,7 +3,7 @@ import { parseUserAgent } from 'react-device-detect'
 import { retry, idToIntervalRecord, cancelRetry } from '@/utils/common'
 import { useAppStore } from '@/store'
 import axios from '@/api/axios'
-import { txToBase64 } from '@raydium-io/raydium-sdk-v2'
+import { txToBase64 } from 'stacc-sdk-v2'
 
 const retryRecord = new Map<
   string,

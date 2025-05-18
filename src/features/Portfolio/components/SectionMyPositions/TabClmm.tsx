@@ -9,7 +9,7 @@ import { colors } from '@/theme/cssVariables'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { ClmmPositionItemsCard } from './components/Clmm/ClmmPositionItemsCard'
 import { openCache } from './components/Clmm/ClmmPositionAccountItem'
-import { ApiV3PoolInfoConcentratedItem } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoConcentratedItem } from 'stacc-sdk-v2'
 import { ClmmLockInfo } from '@/hooks/portfolio/clmm/useClmmBalance'
 
 const ClmmMyPositionTabContent = memo(

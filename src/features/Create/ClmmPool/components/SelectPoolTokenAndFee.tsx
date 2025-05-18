@@ -12,7 +12,7 @@ import { Select } from '@/components/Select'
 import useTokenPrice from '@/hooks/token/useTokenPrice'
 import { useTokenStore } from '@/store'
 import { Box, Flex, HStack, SystemStyleObject, Tag, Text, useDisclosure } from '@chakra-ui/react'
-import { ApiClmmConfigInfo, ApiV3Token, ClmmConfigInfo, PoolFetchType, TokenInfo, solToWSol } from '@raydium-io/raydium-sdk-v2'
+import { ApiClmmConfigInfo, ApiV3Token, ClmmConfigInfo, PoolFetchType, TokenInfo, solToWSol } from 'stacc-sdk-v2'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
 import { useTranslation } from 'react-i18next'
@@ -228,14 +228,14 @@ export default function SelectPoolTokenAndFee({ completed, initState, show, isLo
                     borderBottom: '1px solid transparent'
                   }}
                 >
-                  <Text>{percentFormatter.format(v.tradeFeeRate / 1000000)}</Text>
+                  <Text>{(v as any).description || percentFormatter.format(v.tradeFeeRate / 1000000)}</Text>
                   {selected && <SubtractIcon />}
                 </HStack>
               )
             }
             return null
           }}
-          renderTriggerItem={(v) => (v ? <Text fontSize="sm">{percentFormatter.format(v.tradeFeeRate / 1000000)}</Text> : null)}
+          renderTriggerItem={(v) => (v ? <Text fontSize="sm">{(v as any).description || percentFormatter.format(v.tradeFeeRate / 1000000)}</Text> : null)}
           onChange={(val) => {
             const existed = new Set(existingPools.values()).has(val.id)
             const selected = currentConfig?.id === val.id

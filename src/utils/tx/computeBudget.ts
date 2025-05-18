@@ -1,4 +1,4 @@
-import { SOL_INFO } from '@raydium-io/raydium-sdk-v2'
+import { SOL_INFO } from 'stacc-sdk-v2'
 import { useAppStore } from '@/store'
 import axios from '@/api/axios'
 import { SolanaFeeInfoJson } from '@/type'

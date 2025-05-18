@@ -6,7 +6,7 @@ import { ResolutionToSeconds, SymbolInfo } from './type'
 import { encodeStr } from '@/utils/common'
 import { solToWSol, wSolToSolString } from '@/utils/token'
 import { MintInfo } from '@/features/Launchpad/type'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 
 const lastBarsCache = new Map()
 // DatafeedConfiguration implementation

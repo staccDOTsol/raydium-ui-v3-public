@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react'
-import { ApiV3PoolInfoItem, FetchPoolParams, PoolFetchType } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoItem, FetchPoolParams, PoolFetchType } from 'stacc-sdk-v2'
 import useSWR, { KeyedMutator } from 'swr'
 import shallow from 'zustand/shallow'
 import { AxiosResponse } from 'axios'

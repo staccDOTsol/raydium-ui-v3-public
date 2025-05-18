@@ -1,5 +1,5 @@
 import { Box, Grid, GridItem, HStack, Text, VStack, useClipboard } from '@chakra-ui/react'
-import { RAYMint, SOLMint } from '@raydium-io/raydium-sdk-v2'
+import { RAYMint, SOLMint } from 'stacc-sdk-v2'
 import { PublicKey } from '@solana/web3.js'
 import { useMemo, useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'

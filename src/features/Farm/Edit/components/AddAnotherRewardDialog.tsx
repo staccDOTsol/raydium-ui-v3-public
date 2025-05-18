@@ -20,7 +20,7 @@ import {
   VStack,
   useDisclosure
 } from '@chakra-ui/react'
-import { ApiV3Token, TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, TokenInfo } from 'stacc-sdk-v2'
 import dayjs from 'dayjs'
 import Decimal from 'decimal.js'
 import { useMemo, useState } from 'react'

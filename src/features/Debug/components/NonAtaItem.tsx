@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react'
-import { TokenAccount } from '@raydium-io/raydium-sdk-v2'
+import { TokenAccount } from 'stacc-sdk-v2'
 import { getAssociatedTokenAddressSync } from '@solana/spl-token'
 
 import useTokenInfo from '@/hooks/token/useTokenInfo'

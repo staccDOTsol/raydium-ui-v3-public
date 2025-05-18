@@ -1,4 +1,4 @@
-import { TickUtils, ApiV3PoolInfoConcentratedItem } from '@raydium-io/raydium-sdk-v2'
+import { TickUtils, ApiV3PoolInfoConcentratedItem } from 'stacc-sdk-v2'
 import Decimal from 'decimal.js'
 
 export function getPriceBoundary({ baseIn, poolInfo }: { baseIn: boolean; poolInfo: ApiV3PoolInfoConcentratedItem }):

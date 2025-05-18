@@ -12,7 +12,7 @@ import {
   RewardInfoV6,
   Structure,
   SplAccount
-} from '@raydium-io/raydium-sdk-v2'
+} from 'stacc-sdk-v2'
 import { PublicKey } from '@solana/web3.js'
 import BN from 'bn.js'
 import { getMintSymbol } from '@/utils/token'

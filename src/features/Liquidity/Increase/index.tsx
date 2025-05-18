@@ -1,7 +1,7 @@
 import { ReactNode, useCallback, useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Box, Flex, Grid, GridItem, HStack, Text, TooltipProps, VStack, useDisclosure } from '@chakra-ui/react'
-import { ApiV3PoolInfoStandardItem, ApiV3Token, TokenInfo, CREATE_CPMM_POOL_PROGRAM } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoStandardItem, ApiV3Token, TokenInfo, CREATE_CPMM_POOL_PROGRAM } from 'stacc-sdk-v2'
 import Decimal from 'decimal.js'
 
 import Tabs, { TabItem } from '@/components/Tabs'
@@ -259,7 +259,7 @@ export default function Increase() {
                     {t('liquidity.pool_liquidity')}
                   </Text>
                   <Text color={colors.textSecondary} fontSize="sm" textAlign="right" mt={1}>
-                    {pool ? `$${formatCurrency(new Decimal(pool.lpAmount).mul(pool.lpPrice).toString())}` : '-'}
+                    {pool ? `$${formatCurrency(new Decimal(pool.lpAmount || 1).mul(pool.lpPrice || 0).toString())}` : '-'}
                   </Text>
                 </Box>
               </Flex>

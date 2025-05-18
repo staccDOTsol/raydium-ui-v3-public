@@ -3,7 +3,7 @@ import { Box, Button, Collapse, Flex, GridItem, HStack, Text, VStack, useDisclos
 import Decimal from 'decimal.js'
 import { useTranslation } from 'react-i18next'
 import BN from 'bn.js'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 import MigrateFromStandardDialog from '@/features/Clmm/MigrateClmmFromStandardDialog/Dialog'
 import { FormattedFarmInfoV6 } from '@/hooks/farm/type'
 import { FarmPositionInfo } from '@/hooks/portfolio/farm/useFarmPositions'
@@ -71,8 +71,7 @@ export default function StandardPoolRowItem({ pool, isLoading, position, stakedF
     Map<string, { mint: ApiV3Token[]; usd: string; amount: string[]; rewardTokenUsd: string[] }>
   >(new Map())
   const updateReward = new Map()
-  const { data: migratePoolList } = useMigratePoolConfig({})
-  const migrateData = migratePoolList.find((p) => p.lpMint === pool?.lpMint.address)
+  const migrateData = undefined
 
   const hasStakeFarm = position.hasAmount
   const stakedFarms = position.data.filter((d) => new Decimal(d.lpAmount || 0).gt(0))

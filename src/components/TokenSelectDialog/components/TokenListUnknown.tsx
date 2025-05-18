@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { useState, useCallback, useEffect } from 'react'
-import { TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { TokenInfo } from 'stacc-sdk-v2'
 import { useTokenAccountStore, useTokenStore } from '@/store'
 import { colors } from '@/theme/cssVariables'
 import { useTranslation } from 'react-i18next'

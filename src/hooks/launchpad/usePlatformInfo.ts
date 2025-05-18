@@ -3,7 +3,7 @@ import { useAppStore, useLaunchpadStore } from '@/store'
 import useSWR from 'swr'
 import ToPublicKey from '@/utils/publicKey'
 import { useMemo } from 'react'
-import { PlatformConfig } from '@raydium-io/raydium-sdk-v2'
+import { PlatformConfig } from 'stacc-sdk-v2'
 
 interface Props {
   shouldFetch?: boolean

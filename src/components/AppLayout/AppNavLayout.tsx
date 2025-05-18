@@ -1,7 +1,6 @@
 import { useDisclosure } from '@/hooks/useDelayDisclosure'
 import RaydiumLogo from '@/icons/RaydiumLogo'
 import RaydiumLogoOutline from '@/icons/RaydiumLogoOutline'
-import ChevronDownIcon from '@/icons/misc/ChevronDownIcon'
 import Gear from '@/icons/misc/Gear'
 import { useAppStore } from '@/store'
 import { colors } from '@/theme/cssVariables'
@@ -10,8 +9,6 @@ import {
   Box,
   Flex,
   HStack,
-  Menu,
-  MenuButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -31,7 +28,6 @@ import { MobileBottomNavbar } from './MobileBottomNavbar'
 import { ColorThemeSettingField } from './components/ColorThemeSettingField'
 import { DefaultExplorerSettingField } from './components/DefaultExplorerSettingField'
 import { LanguageSettingField } from './components/LanguageSettingField'
-import { NavMoreButtonMenuPanel } from './components/NavMoreButtonMenuPanel'
 import { RPCConnectionSettingField } from './components/RPCConnectionSettingField'
 import { Divider } from './components/SettingFieldDivider'
 import { SlippageToleranceSettingField } from './components/SlippageToleranceSettingField'
@@ -39,8 +35,6 @@ import { VersionedTransactionSettingField } from './components/VersionedTransact
 import { PriorityButton } from './components/PriorityButton'
 import DisclaimerModal from './components/DisclaimerModal'
 import AppVersion from './AppVersion'
-import TagNewIcon from '@/icons/misc/TagNewIcon'
-import { useReferrerQuery } from '@/features/Launchpad/utils'
 import { TorqueButton } from '@/features/Torque'
 
 export interface NavSettings {
@@ -57,7 +51,6 @@ function AppNavLayout({
 }) {
   const { t } = useTranslation()
   const { pathname } = useRouter()
-  const queryReferrer = useReferrerQuery('?')
 
   return (
     <Flex direction="column" id="app-layout" height="full" overflow={overflowHidden ? 'hidden' : 'auto'}>
@@ -88,12 +81,6 @@ function AppNavLayout({
                 ? t('liquidity.title')
                 : pathname === '/portfolio'
                 ? t('portfolio.title')
-                : pathname === '/playground'
-                ? t('common.playground')
-                : pathname === '/staking'
-                ? t('staking.title')
-                : pathname === '/bridge'
-                ? t('bridge.title')
                 : ''}
             </Text>
           </HStack>
@@ -105,33 +92,6 @@ function AppNavLayout({
             <RouteLink href="/swap" isActive={pathname === '/swap'} title={t('swap.title')} />
             <RouteLink href="/liquidity-pools" isActive={pathname.includes('/liquidity')} title={t('liquidity.title')} />
             <RouteLink href="/portfolio" isActive={pathname === '/portfolio'} title={t('portfolio.title')} />
-            <RouteLink href="https://perps.raydium.io" isActive={false} title={t('perpetuals.title')} />
-            <RouteLink
-              href={`/launchpad${queryReferrer}`}
-              isActive={pathname.includes('/launchpad')}
-              title={
-                <Box as="span" bgGradient="linear-gradient(245.22deg, #FF2FC8 7.97%, #FFB12B 49.17%, #D3D839 92.1%)" bgClip="text">
-                  {t('launchpad.title')}
-                </Box>
-              }
-              slotAfter={<TagNewIcon />}
-              sx={{
-                gap: '0.25rem'
-              }}
-            />
-            <Menu size="lg">
-              <MenuButton fontSize={'lg'} px={4} py={2}>
-                <Flex
-                  align="center"
-                  gap={0.5}
-                  color={pathname === '/staking' || pathname === '/bridge' ? colors.textSecondary : colors.textTertiary}
-                >
-                  {pathname === '/staking' ? t('staking.title') : pathname === '/bridge' ? t('bridge.title') : t('common.more')}
-                  <ChevronDownIcon width={16} height={16} />
-                </Flex>
-              </MenuButton>
-              <NavMoreButtonMenuPanel />
-            </Menu>
           </HStack>
         </Desktop>
 
@@ -140,7 +100,6 @@ function AppNavLayout({
           <TorqueButton />
           <PriorityButton />
           <SettingsMenu />
-          {/* <EVMWallet />  don't need currently yet*/}
           <SolWallet />
         </Flex>
       </HStack>
@@ -253,7 +212,7 @@ function SettingsMenuModalContent(props: { isOpen: boolean; triggerRef: React.Re
     <Modal size={'lg'} isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
       <ModalContent
-        css={{
+        css={{ 
           transform: (() => {
             const triggerRect = getTriggerRect()
             return (

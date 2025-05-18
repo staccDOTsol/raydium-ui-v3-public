@@ -3,7 +3,7 @@ import DeleteIcon from '@/icons/misc/DeleteIcon'
 import EditIcon from '@/icons/misc/EditIcon'
 import { colors } from '@/theme/cssVariables'
 import { Box, Flex, Grid, GridItem, HStack, Highlight, Text } from '@chakra-ui/react'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 
 type RewardHeaderProps = {
   index: number

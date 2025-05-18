@@ -3,7 +3,7 @@ import { colors } from '@/theme/cssVariables'
 import toApr from '@/utils/numberish/toApr'
 import { formatCurrency, formatToRawLocaleStr } from '@/utils/numberish/formatter'
 import { Box, Text, Tag, Flex } from '@chakra-ui/react'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 
 interface FarmInfoItemProps {
   name: string

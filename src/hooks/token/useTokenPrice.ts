@@ -2,7 +2,7 @@ import axios from '@/api/axios'
 import { isValidPublicKey } from '@/utils/publicKey'
 import { MINUTE_MILLISECONDS } from '@/utils/date'
 import { useTokenStore, TokenPrice, useAppStore } from '@/store'
-import { solToWSol, WSOLMint, RAYMint, USDCMint, USDTMint, mSOLMint } from '@raydium-io/raydium-sdk-v2'
+import { solToWSol, WSOLMint, RAYMint, USDCMint, USDTMint, mSOLMint } from 'stacc-sdk-v2'
 import { NATIVE_MINT } from '@solana/spl-token'
 import { PublicKey } from '@solana/web3.js'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -32,19 +32,19 @@ export default function useTokenPrice(props: { mintList: (string | PublicKey | u
   const { mintList, refreshInterval = 3 * MINUTE_MILLISECONDS, timeout = 800 } = props || {}
   const tokenPriceRecord = useTokenStore((s) => s.tokenPriceRecord)
   const BASE_HOST = useAppStore((s) => s.urlConfigs.BASE_HOST)
-  const MINT_PRICE = useAppStore((s) => s.urlConfigs.MINT_PRICE)
+  const MINT_PRICE = "https://api-v3.raydium.io/mint/price"
   const [startFetch, setStartFetch] = useState(timeout === 0)
   const [refreshTag, setRefreshTag] = useState(Date.now())
 
   const readyList = useMemo(
-    () => Array.from(new Set(mintList.filter((m) => !!m && isValidPublicKey(m)).map((m) => solToWSol(m!).toString()))),
+    () => Array.from(new Set(mintList?.filter((m) => !!m && isValidPublicKey(m)).map((m) => solToWSol(m!).toString()))),
     [JSON.stringify(mintList)]
   )
 
   const shouldFetch = startFetch && prepareFetchList.size > 0
 
   const { data, isLoading, error, ...rest } = useSWR(
-    shouldFetch ? [`${BASE_HOST}${MINT_PRICE}` + `?mints=${Array.from(prepareFetchList).slice(0, 49).join(',')}`, fetchRefreshTag] : null,
+    shouldFetch ? [`https://api-v3.raydium.io/mint/price` + `?mints=${Array.from(prepareFetchList).slice(0, 49).join(',')}`, fetchRefreshTag] : null,
     fetcher,
     {
       refreshInterval,

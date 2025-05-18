@@ -22,7 +22,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CpmmLockData } from '@/hooks/portfolio/cpmm/useLockCpmmBalance'
 import { getFirstNonZeroDecimal } from '@/utils/numberish/formatter'
-import { ApiV3PoolInfoStandardItemCpmm } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoStandardItemCpmm } from 'stacc-sdk-v2'
 import { PublicKey } from '@solana/web3.js'
 import BN from 'bn.js'
 export default function ClaimFeesModal({

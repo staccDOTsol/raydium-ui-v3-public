@@ -114,7 +114,7 @@ export default function PoolInfo({ pool, aprData }: { pool?: FormattedPoolInfoSt
           {t('liquidity.pool_liquidity')}
         </Text>
         <Text color={colors.textSecondary} fontSize="sm" opacity={0.6}>
-          {pool ? `$${formatCurrency(new Decimal(pool.lpAmount).mul(pool.lpPrice).toString())}` : '-'}
+          {pool ? `$${formatCurrency(new Decimal(pool.lpAmount || 1).mul(pool.lpPrice || 0).toString())}` : '-'}
         </Text>
       </Flex>
       <Flex mt={2} justify={'space-between'} align="center">

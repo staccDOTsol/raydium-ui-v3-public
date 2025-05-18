@@ -17,7 +17,7 @@ import {
   CircularProgress,
   Tooltip as ChakraTip
 } from '@chakra-ui/react'
-import { ApiV3Token, RAYMint, SOL_INFO, TokenInfo, TransferFeeDataBaseType } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, RAYMint, SOL_INFO, TokenInfo, TransferFeeDataBaseType } from 'stacc-sdk-v2'
 import { PublicKey } from '@solana/web3.js'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -110,22 +110,12 @@ export function SwapPanel({
         }
       : {}
   )
-  const [inputFeeConfig, outputFeeConfig] = [
-    tokenInput?.extensions.feeConfig || inputInfo?.extensions.feeConfig,
-    tokenOutput?.extensions.feeConfig || outputInfo?.extensions.feeConfig
-  ]
 
   const feeKeys: { input: 'newerTransferFee' | 'olderTransferFee'; output: 'newerTransferFee' | 'olderTransferFee' } = useMemo(() => {
     try {
       return {
-        input:
-          !epochInfo || !inputFeeConfig || Number(epochInfo.epoch) >= Number(inputFeeConfig.newerTransferFee.epoch)
-            ? 'newerTransferFee'
-            : 'olderTransferFee',
-        output:
-          !epochInfo || !outputFeeConfig || Number(epochInfo.epoch) >= Number(outputFeeConfig.newerTransferFee.epoch)
-            ? 'newerTransferFee'
-            : 'olderTransferFee'
+        input:'olderTransferFee',
+        output:'olderTransferFee'
       }
     } catch {
       return {
@@ -133,7 +123,7 @@ export function SwapPanel({
         output: 'newerTransferFee'
       }
     }
-  }, [epochInfo, inputFeeConfig, outputFeeConfig])
+  }, [epochInfo])
 
   useEffect(() => {
     if (defaultInput) setInputMint(defaultInput)
@@ -426,47 +416,6 @@ export function SwapPanel({
           />
         </Flex>
       )}
-      {inputFeeConfig || outputFeeConfig ? (
-        <Flex mt="-1" mb="4">
-          {inputFeeConfig && tokenInput ? (
-            <Tooltip
-              contentBoxProps={{ sx: { width: 'fit-content' } }}
-              label={<TransferFeeTip feeConfig={inputFeeConfig} token={tokenInput!} />}
-            >
-              <Box
-                fontSize="xs"
-                bg={colors.backgroundTransparent10}
-                borderColor={colors.primary}
-                color={colors.primary}
-                borderWidth="1px"
-                px="1"
-                borderRadius="4px"
-              >
-                {getMintSymbol({ mint: tokenInput })} ({inputFeeConfig[feeKeys.input].transferFeeBasisPoints / 100}% {t('common.tax')})
-              </Box>
-            </Tooltip>
-          ) : null}
-
-          {outputFeeConfig && tokenOutput ? (
-            <Tooltip
-              contentBoxProps={{ sx: { width: 'fit-content' } }}
-              label={<TransferFeeTip feeConfig={outputFeeConfig} token={tokenOutput!} />}
-            >
-              <Box
-                fontSize="xs"
-                bg={colors.backgroundTransparent10}
-                borderColor={colors.primary}
-                color={colors.primary}
-                borderWidth="1px"
-                px="1"
-                borderRadius="4px"
-              >
-                {getMintSymbol({ mint: tokenOutput })} ({outputFeeConfig[feeKeys.output].transferFeeBasisPoints / 100}% {t('common.tax')})
-              </Box>
-            </Tooltip>
-          ) : null}
-        </Flex>
-      ) : null}
       <ConnectedButton
         isDisabled={new Decimal(amountIn || 0).isZero() || !!swapError || needPriceUpdatedAlert || swapDisabled}
         isLoading={isComputing || isSending}

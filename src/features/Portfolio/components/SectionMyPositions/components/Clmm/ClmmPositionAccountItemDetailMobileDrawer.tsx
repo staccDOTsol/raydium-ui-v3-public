@@ -296,7 +296,7 @@ export default function ClmmPositionAccountItemDetailMobileDrawer({
                   <PoolListItemAprLine aprData={aprData} />
                 </Box>
                 <Box gridArea="tokens">
-                  {poolInfo.weeklyRewards.map((r) => (
+                  {poolInfo.weeklyRewards?.map((r) => (
                     <TokenAvatar key={r.token.address} token={r.token} />
                   ))}
                 </Box>

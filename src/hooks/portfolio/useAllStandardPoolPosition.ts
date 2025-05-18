@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { RAYMint, ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { RAYMint, ApiV3Token } from 'stacc-sdk-v2'
 
 import { useTokenAccountStore, useTokenStore } from '@/store'
 import useFarmPositions from '@/hooks/portfolio/farm/useFarmPositions'

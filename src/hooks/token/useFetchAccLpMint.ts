@@ -20,9 +20,7 @@ export type MintData = RawMint & { address: PublicKey }
 
 const preFetchMints: Map<string, MintData> = new Map()
 const poolLpAuthority = new Set([
-  '5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1',
-  '3uaZBfHPfmpAHW7dsimC1SnyR61X4bJqQZKWmRSCXJxv',
-  'GpMZbSM2GgvTKHJirzeGfMFoaZ8UR2X7F4v8vHTvxFbL'
+  '3pbT7BVV2ph5vaaNPPBeqijHUYyiHbBiTZHZxruwNjDb'
 ])
 // const LP_CACHE_KEY = '_r_lp_b2_'
 // const noneLpMintSet = new Set<string>(JSON.parse(getStorageItem(LP_CACHE_KEY) || '[]'))
@@ -54,6 +52,7 @@ const fetcher = async ([connection, publicKeyList]: [Connection, string[]]) => {
     .flat()
     .map((accountData, idx) => {
       if (accountData?.data.length === MintLayout.span) {
+        // @ts-ignore
         const r = MintLayout.decode(accountData.data)
         const mintData = { ...r, address: newFetchList[idx] }
         preFetchMints.set(mintData.address.toBase58(), mintData)
@@ -86,7 +85,7 @@ export default function useFetchAccLpMint<T>({
   const readyFetchMints = tokenAccounts.filter((p) => !p.mint.equals(PublicKey.default) && !p.amount.isZero()).map((t) => t.mint.toString())
   // .filter((k) => !noneLpMintSet.has(k))
 
-  const fetch = shouldFetch && !!connection
+  const fetch = true//shouldFetch && !!connection
 
   const { data, ...rest } = useSWR(fetch ? [connection, readyFetchMints] : null, fetcher, {
     refreshInterval,

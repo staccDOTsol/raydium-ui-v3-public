@@ -26,12 +26,12 @@ export default function PoolListItemAprDetailPopoverContent({
   const { colorMode } = useColorMode()
   const isLight = colorMode === 'light'
   const { data: tokenPrices } = useTokenPrice({
-    mintList: weeklyRewards.map((r) => r.token.address)
+    mintList: weeklyRewards?.map((r) => r.token.address)
   })
 
   const haveWeeklyRewards =
-    weeklyRewards.length > 0 &&
-    weeklyRewards.some(
+    weeklyRewards?.length > 0 &&
+    weeklyRewards?.some(
       (reward) => Number(reward.amount) !== 0 && (!reward.endTime || reward.endTime * 1000 > dayjs().subtract(10, 'day').valueOf())
     )
   return (
@@ -60,7 +60,7 @@ export default function PoolListItemAprDetailPopoverContent({
                 </Box>
               </Flex>
               {aprData.rewards.map(({ apr, mint }, idx) => {
-                const reward = weeklyRewards.find((r) => r.token.address === mint.address)
+                const reward = weeklyRewards?.find((r) => r.token.address === mint.address)
                 if (!reward || reward.amount === '0') return null
                 return (
                   <Flex w="full" gap={4} key={`reward-${mint?.symbol}-${idx}`} justify="space-between" align="center">
@@ -90,7 +90,7 @@ export default function PoolListItemAprDetailPopoverContent({
             </Box>
           </Flex>
           {/* total apr */}
-          {weeklyRewards.map((reward) => {
+          {weeklyRewards?.map((reward) => {
             if (reward.amount === '0') return null
             const startTime = reward.startTime
             const endTime = reward.endTime

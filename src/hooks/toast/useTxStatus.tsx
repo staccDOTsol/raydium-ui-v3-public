@@ -2,7 +2,7 @@ import { useEffect, ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SignatureResult, Context, VersionedTransaction, Transaction, TransactionError } from '@solana/web3.js'
 import { Flex, Box } from '@chakra-ui/react'
-import { ApiV3Token, TxVersion } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, TxVersion } from 'stacc-sdk-v2'
 import { Subject } from 'rxjs'
 
 import { useAppStore } from '@/store/useAppStore'

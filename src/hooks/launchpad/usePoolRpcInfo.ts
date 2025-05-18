@@ -9,7 +9,7 @@ import {
   getPdaLaunchpadVaultId,
   getPdaLaunchpadPoolId,
   LaunchpadPoolInitParam
-} from '@raydium-io/raydium-sdk-v2'
+} from 'stacc-sdk-v2'
 import ToPublicKey from '@/utils/publicKey'
 import { useEffect, useMemo, useState } from 'react'
 import Decimal from 'decimal.js'

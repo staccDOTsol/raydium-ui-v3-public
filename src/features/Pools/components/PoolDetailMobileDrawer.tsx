@@ -23,7 +23,7 @@ import {
   VStack,
   Badge
 } from '@chakra-ui/react'
-import { ApiV3Token, TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, TokenInfo } from 'stacc-sdk-v2'
 import React from 'react'
 import useTokenPrice from '@/hooks/token/useTokenPrice'
 import { useTranslation } from 'react-i18next'
@@ -85,7 +85,7 @@ export default function PoolDetailMobileDrawer({
 }: PoolDetailMobileDrawerProps) {
   const { t } = useTranslation()
   const { data: tokenPrices } = useTokenPrice({
-    mintList: weeklyRewards.map((r) => r.token.address)
+    mintList: weeklyRewards?.map((r) => r.token.address)
   })
 
   return (
@@ -185,7 +185,7 @@ export default function PoolDetailMobileDrawer({
                 </Flex>
               </Flex>
             </ContentCard>
-            {weeklyRewards.length !== 0 && (
+            {weeklyRewards?.length !== 0 && (
               <ContentCard>
                 <Flex gap="2" alignItems="center">
                   <Text fontSize="sm" color={colors.textSecondary}>
@@ -194,7 +194,7 @@ export default function PoolDetailMobileDrawer({
                   {isEcosystem ? <Badge variant="crooked">{t('badge.ecosystem')}</Badge> : null}
                 </Flex>
                 <SimpleGrid templateColumns={'repeat(2, 1fr)'} columnGap={2}>
-                  {weeklyRewards.map((reward) => (
+                  {weeklyRewards?.map((reward) => (
                     <Flex
                       w="full"
                       key={String(reward.token?.address)}

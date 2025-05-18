@@ -7,7 +7,7 @@ import { getMintSymbol } from '@/utils/token'
 import { Badge, Box, Button, Flex, HStack, Text, Tooltip, VStack } from '@chakra-ui/react'
 import Decimal from 'decimal.js'
 import { useTranslation } from 'react-i18next'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 
 type PendingRewardsProps = {
   pendingReward: number | string

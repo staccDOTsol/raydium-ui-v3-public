@@ -17,7 +17,7 @@ import {
   Tab
 } from '@chakra-ui/react'
 import Decimal from 'decimal.js'
-import { SOLMint } from '@raydium-io/raydium-sdk-v2'
+import { SOLMint } from 'stacc-sdk-v2'
 import { QuestionToolTip } from '@/components/QuestionToolTip'
 import DecimalInput from '@/components/DecimalInput'
 import { colors } from '@/theme/cssVariables'

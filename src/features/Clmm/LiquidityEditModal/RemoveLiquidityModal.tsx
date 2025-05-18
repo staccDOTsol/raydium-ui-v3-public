@@ -27,7 +27,7 @@ import {
   ModalOverlay,
   Text
 } from '@chakra-ui/react'
-import { ApiV3PoolInfoConcentratedItem } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoConcentratedItem } from 'stacc-sdk-v2'
 import IntervalCircle, { IntervalCircleHandler } from '@/components/IntervalCircle'
 import { SlippageAdjuster } from '@/components/SlippageAdjuster'
 import { SlippageSettingField } from '@/components/SlippageAdjuster/SlippageSettingField'

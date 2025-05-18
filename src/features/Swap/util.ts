@@ -1,4 +1,4 @@
-import { SOLMint, WSOLMint } from '@raydium-io/raydium-sdk-v2'
+import { SOLMint, WSOLMint } from 'stacc-sdk-v2'
 import { isClient } from '@/utils/common'
 
 export const isSol = (mint: string) => mint === SOLMint.toBase58()

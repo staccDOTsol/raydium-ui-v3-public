@@ -1,5 +1,5 @@
 import { PublicKey } from '@solana/web3.js'
-import { ApiV3PoolInfoItem, TickUtils, ApiV3PoolInfoConcentratedItem } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoItem, TickUtils, ApiV3PoolInfoConcentratedItem } from 'stacc-sdk-v2'
 import { getPoolName } from '@/features/Pools/util'
 import { wSolToSolString } from '@/utils/token'
 import { toTotalPercent } from '@/utils/numberish/toPercentString'
@@ -47,11 +47,11 @@ export function formatPoolData(pool: ApiV3PoolInfoItem): FormattedPoolInfoItem {
             isTradingFee: true
           },
           ...aprData.rewardApr
-            .filter((_, idx) => !!pool.rewardDefaultInfos[idx] && isRewardValid(pool.rewardDefaultInfos[idx].endTime))
+            .filter((_, idx) => !!pool.rewardDefaultInfos?.[idx] && isRewardValid(pool.rewardDefaultInfos?.[idx].endTime))
             .map((r, idx) => ({
               apr: r,
               percent: toTotalPercent(r, aprData.apr ?? 0),
-              token: { ...pool.rewardDefaultInfos[idx].mint }
+              token: { ...pool.rewardDefaultInfos?.[idx].mint }
             }))
         ]
       }
@@ -64,7 +64,7 @@ export function formatPoolData(pool: ApiV3PoolInfoItem): FormattedPoolInfoItem {
   )
 
   const weeklyRewards = pool.rewardDefaultInfos
-    .filter((r) => isRewardValid(r.endTime))
+    ?.filter((r) => isRewardValid(r.endTime))
     .map((r) => {
       const amount = new Decimal(r.perSecond || 0).mul(60 * 60 * 24 * 7).div(10 ** r.mint.decimals)
       return {
@@ -76,7 +76,7 @@ export function formatPoolData(pool: ApiV3PoolInfoItem): FormattedPoolInfoItem {
       }
     })
   const formattedRewardInfos = pool.rewardDefaultInfos
-    .filter((r) => isRewardValid(r.endTime))
+    ?.filter((r) => isRewardValid(r.endTime))
     .map((r) => {
       const apr = allApr[AprKey.Day].find((data) => data.token?.address === r.mint.address)?.apr || 0
       const now = dayjs(Date.now() + useAppStore.getState().chainTimeOffset)
@@ -146,7 +146,7 @@ export function formatPoolData(pool: ApiV3PoolInfoItem): FormattedPoolInfoItem {
       [AprKey.Month]: allApr[AprKey.Month].reduce((a, { apr: b }) => a + Number(b), 0)
     },
     formattedRewardInfos,
-    isRewardEnded: !formattedRewardInfos.some((r) => !r.ended)
+    isRewardEnded: !formattedRewardInfos?.some((r) => !r.ended)
   }
 }
 

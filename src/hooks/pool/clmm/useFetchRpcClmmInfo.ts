@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import useSWR from 'swr'
 import { Connection, PublicKey } from '@solana/web3.js'
 import shallow from 'zustand/shallow'
-import { ApiV3PoolInfoConcentratedItem, PoolInfoLayout, SqrtPriceMath, PoolFarmRewardInfo } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoConcentratedItem, PoolInfoLayout, SqrtPriceMath, PoolFarmRewardInfo } from 'stacc-sdk-v2'
 import ToPublicKey from '@/utils/publicKey'
 import { useAppStore } from '@/store'
 import { isValidPublicKey } from '@/utils/publicKey'
@@ -79,7 +79,7 @@ export default function useFetchRpcClmmInfo(props: {
     () =>
       rewardVaultAmount.map((r, idx) => {
         const remaining = new Decimal(r.amount.toString()).sub(ownerRewards[idx].rewardTotalEmissioned.toString())
-        const rewardInfo = apiPoolInfo?.rewardDefaultInfos.find((pr) => pr.mint.address === r.mint.toBase58())
+        const rewardInfo = apiPoolInfo?.rewardDefaultInfos?.find((pr) => pr.mint.address === r.mint.toBase58())
         return {
           hasRemaining: remaining.gt(0),
           mint: r.mint.toBase58(),

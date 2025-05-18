@@ -1,7 +1,7 @@
 import { Bar } from '@/charting_library/charting_library'
 import { ResolutionToSeconds, SymbolInfo } from './type'
 import { Connection } from '@solana/web3.js'
-import { Curve, LaunchpadPool, LaunchpadPoolInfo } from '@raydium-io/raydium-sdk-v2'
+import { Curve, LaunchpadPool, LaunchpadPoolInfo } from 'stacc-sdk-v2'
 import ToPublicKey from '@/utils/publicKey'
 import { initPoolPriceDecimal } from './utils'
 

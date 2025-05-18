@@ -15,7 +15,7 @@ import {
   VStack,
   useDisclosure
 } from '@chakra-ui/react'
-import { TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { TokenInfo } from 'stacc-sdk-v2'
 import Decimal from 'decimal.js'
 
 import Button from '@/components/Button'
@@ -27,7 +27,7 @@ import { useAppStore, useTokenAccountStore } from '@/store'
 import { EditReward } from '../util'
 import useAddNewRewardSchema from '../schema/useAddNewRewardSchema'
 import dayjs from 'dayjs'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 import DatePickerModal from '@/components/FarmDatePickerModal'
 import { formatToRawLocaleStr } from '@/utils/numberish/formatter'
 import { wSolToSol, wsolToSolToken } from '@/utils/token'

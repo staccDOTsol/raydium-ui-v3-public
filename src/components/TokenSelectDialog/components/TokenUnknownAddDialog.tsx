@@ -1,4 +1,4 @@
-import { TokenInfo, ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { TokenInfo, ApiV3Token } from 'stacc-sdk-v2'
 import { useTranslation } from 'react-i18next'
 import { useEvent } from '@/hooks/useEvent'
 import { colors } from '@/theme/cssVariables'

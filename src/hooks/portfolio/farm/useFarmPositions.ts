@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from 'react'
-import { FarmPositionData } from '@raydium-io/raydium-sdk-v2'
+import { FarmPositionData } from 'stacc-sdk-v2'
 import useSWR from 'swr'
 import shallow from 'zustand/shallow'
 import axios from '@/api/axios'

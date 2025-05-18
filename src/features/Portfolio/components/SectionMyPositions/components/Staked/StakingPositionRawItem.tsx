@@ -1,7 +1,7 @@
 import { Box, Flex, Grid, GridItem, Text, useDisclosure } from '@chakra-ui/react'
 import Decimal from 'decimal.js'
 import { useTranslation } from 'react-i18next'
-import { ApiV3Token, ApiStakePool } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, ApiStakePool } from 'stacc-sdk-v2'
 
 import { colors } from '@/theme/cssVariables'
 import { useFarmStore } from '@/store/useFarmStore'

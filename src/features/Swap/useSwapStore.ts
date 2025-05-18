@@ -1,5 +1,5 @@
 import { PublicKey, VersionedTransaction, Transaction, SignatureResult } from '@solana/web3.js'
-import { TxVersion, txToBase64, SOL_INFO, ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { TxVersion, txToBase64, SOL_INFO, ApiV3Token } from 'stacc-sdk-v2'
 import { createStore, useAppStore, useTokenAccountStore, useTokenStore } from '@/store'
 import { toastSubject } from '@/hooks/toast/useGlobalToast'
 import { txStatusSubject, TOAST_DURATION } from '@/hooks/toast/useTxStatus'

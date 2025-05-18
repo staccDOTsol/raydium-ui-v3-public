@@ -1,4 +1,4 @@
-import { ApiV3PoolInfoConcentratedItem, PoolUtils, ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoConcentratedItem, PoolUtils, ApiV3Token } from 'stacc-sdk-v2'
 import { ClmmPosition } from '@/hooks/portfolio/clmm/useClmmBalance'
 import { TokenPrice } from '@/hooks/token/useTokenPrice'
 import { AprKey } from '@/hooks/pool/type'
@@ -42,15 +42,15 @@ export function getPositionAprCore({
         apr: 0,
         percentInTotal: 0
       },
-      rewards: poolInfo.rewardDefaultInfos.map((i, idx) => ({
+      rewards: poolInfo.rewardDefaultInfos?.map((i, idx) => ({
         apr: 0,
         percentInTotal: 0,
-        mint: poolInfo.rewardDefaultInfos[idx].mint
+        mint: poolInfo.rewardDefaultInfos?.[idx]?.mint
       })),
       apr: 0
     }
   }
-  if (planType === 'D') {
+  if (false) {
     const planBApr = PoolUtils.estimateAprsForPriceRangeDelta({
       poolInfo,
       aprType: timeBasis,
@@ -61,7 +61,7 @@ export function getPositionAprCore({
       chainTime: (Date.now() + chainTimeOffsetMs) / 1000,
       liquidity: positionAccount.liquidity
     })
-    const slicedRewardApr = planBApr.rewardsApr.slice(0, poolInfo.rewardDefaultInfos.length)
+    const slicedRewardApr = planBApr.rewardsApr.slice(0, poolInfo.rewardDefaultInfos?.length)
     const total = [planBApr.feeApr, ...slicedRewardApr].reduce((a, b) => a + b, 0)
     return {
       fee: {
@@ -71,7 +71,7 @@ export function getPositionAprCore({
       rewards: slicedRewardApr.map((i, idx) => ({
         apr: i,
         percentInTotal: (i / total) * 100,
-        mint: poolInfo.rewardDefaultInfos[idx].mint
+        mint: poolInfo.rewardDefaultInfos?.[idx].mint
       })),
       apr: isNaN(planBApr.apr) ? 0 : planBApr.apr
     }
@@ -82,7 +82,7 @@ export function getPositionAprCore({
       positionTickLowerIndex: Math.min(positionAccount.tickLower, positionAccount.tickUpper),
       positionTickUpperIndex: Math.max(positionAccount.tickLower, positionAccount.tickUpper)
     })
-    const slicedRewardApr = planCApr.rewardsApr.slice(0, poolInfo.rewardDefaultInfos.length)
+    const slicedRewardApr = planCApr.rewardsApr.slice(0, poolInfo.rewardDefaultInfos?.length)
     const total = [planCApr.feeApr, ...slicedRewardApr].reduce((a, b) => a + b, 0)
     return {
       fee: {
@@ -92,7 +92,7 @@ export function getPositionAprCore({
       rewards: slicedRewardApr.map((i, idx) => ({
         apr: i,
         percentInTotal: (i / total) * 100,
-        mint: poolInfo.rewardDefaultInfos[idx].mint
+        mint: poolInfo.rewardDefaultInfos?.[idx].mint
       })),
       apr: isNaN(planCApr.apr) ? 0 : planCApr.apr
     }
@@ -128,15 +128,15 @@ export function getPoolTickAprCore({
         apr: 0,
         percentInTotal: 0
       },
-      rewards: poolInfo.rewardDefaultInfos.map((i, idx) => ({
+      rewards: poolInfo.rewardDefaultInfos?.map((i, idx) => ({
         apr: 0,
         percentInTotal: 0,
-        mint: poolInfo.rewardDefaultInfos[idx].mint
+        mint: poolInfo.rewardDefaultInfos?.[idx].mint
       })),
       apr: 0
     }
   }
-  if (planType === 'D') {
+  if (false) {
     const planBApr = PoolUtils.estimateAprsForPriceRangeDelta({
       poolInfo,
       poolLiquidity,
@@ -147,7 +147,7 @@ export function getPoolTickAprCore({
       chainTime: (Date.now() + chainTimeOffsetMs) / 1000,
       liquidity
     })
-    const slicedRewardApr = planBApr.rewardsApr.slice(0, poolInfo.rewardDefaultInfos.length)
+    const slicedRewardApr = planBApr.rewardsApr.slice(0, poolInfo.rewardDefaultInfos?.length)
     const total = [planBApr.feeApr, ...slicedRewardApr].reduce((a, b) => a + b, 0)
     return {
       fee: {
@@ -157,7 +157,7 @@ export function getPoolTickAprCore({
       rewards: slicedRewardApr.map((i, idx) => ({
         apr: i,
         percentInTotal: (i / total) * 100,
-        mint: poolInfo.rewardDefaultInfos[idx].mint
+        mint: poolInfo.rewardDefaultInfos?.[idx].mint
       })),
       apr: planBApr.apr
     }
@@ -168,7 +168,7 @@ export function getPoolTickAprCore({
     positionTickLowerIndex: Math.min(tickLower, tickUpper),
     positionTickUpperIndex: Math.max(tickLower, tickUpper)
   })
-  const slicedRewardApr = planCApr.rewardsApr.slice(0, poolInfo.rewardDefaultInfos.length)
+  const slicedRewardApr = planCApr.rewardsApr.slice(0, poolInfo.rewardDefaultInfos?.length)
   const total = [planCApr.feeApr, ...slicedRewardApr].reduce((a, b) => a + b, 0)
   return {
     fee: {
@@ -178,7 +178,7 @@ export function getPoolTickAprCore({
     rewards: slicedRewardApr.map((i, idx) => ({
       apr: i,
       percentInTotal: (i / total) * 100,
-      mint: poolInfo.rewardDefaultInfos[idx].mint
+      mint: poolInfo.rewardDefaultInfos?.[idx].mint
     })),
     apr: planCApr.apr
   }

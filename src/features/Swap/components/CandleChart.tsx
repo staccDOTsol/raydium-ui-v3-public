@@ -1,7 +1,7 @@
 import useFetchPoolKLine, { TimeType } from '@/hooks/pool/useFetchPoolKLine'
 import { colors } from '@/theme/cssVariables/colors'
 import { AbsoluteCenter, Box, GridItem, Spinner, Text, useColorMode } from '@chakra-ui/react'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 import dayjs from 'dayjs'
 import { ColorType, CrosshairMode, IChartApi, ISeriesApi, TickMarkType, createChart } from 'lightweight-charts'
 import { useEffect, useRef } from 'react'

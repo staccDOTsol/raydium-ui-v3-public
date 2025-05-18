@@ -1,6 +1,6 @@
 import { Flex, Text } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 
 import { colors } from '@/theme/cssVariables'
 import { formatCurrency } from '@/utils/numberish/formatter'

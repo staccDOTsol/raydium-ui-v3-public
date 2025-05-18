@@ -1,4 +1,4 @@
-import { ApiV3PoolInfoItem, ApiV3PoolInfoCountItem, TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoItem, ApiV3PoolInfoCountItem, TokenInfo } from 'stacc-sdk-v2'
 
 import { isClient } from '@/utils/common'
 import { formatLocaleStr } from '@/utils/numberish/formatter'
@@ -63,7 +63,7 @@ export const formatPoolData = ({ pool, timeData }: { pool: ApiV3PoolInfoItem; ti
     ...timeData.rewardApr.map((r, idx) => ({
       apr: r,
       percentInTotal: toTotalPercent(r, timeData.apr),
-      token: { ...pool.rewardDefaultInfos[idx].mint, priority: 1 }
+      token: { ...pool.rewardDefaultInfos?.[idx].mint, priority: 1 }
     }))
   )
 

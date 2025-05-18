@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useMemo } from 'react'
 import { clusterApiUrl, PublicKey, Transaction, VersionedTransaction } from '@solana/web3.js'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
-import { TxVersion, validateAndParsePublicKey, txToBase64 } from '@raydium-io/raydium-sdk-v2'
+import { TxVersion, validateAndParsePublicKey, txToBase64 } from 'stacc-sdk-v2'
 import { useAppStore, defaultEndpoint } from '@/store/useAppStore'
 import usePrevious from '@/hooks/usePrevious'
 import shallow from 'zustand/shallow'

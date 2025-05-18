@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ApiClmmConfigInfo, TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { ApiClmmConfigInfo, TokenInfo } from 'stacc-sdk-v2'
 import * as yup from 'yup'
 import { TFunction } from 'i18next'
 import { useTranslation } from 'react-i18next'

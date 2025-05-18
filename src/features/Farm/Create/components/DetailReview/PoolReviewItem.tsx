@@ -6,7 +6,7 @@ import { colors } from '@/theme/cssVariables'
 import toPercentString from '@/utils/numberish/toPercentString'
 import { formatCurrency, formatToRawLocaleStr } from '@/utils/numberish/formatter'
 import { Box, HStack, Text } from '@chakra-ui/react'
-import { ApiV3PoolInfoItem } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoItem } from 'stacc-sdk-v2'
 import { useTranslation } from 'react-i18next'
 
 type PoolReviewItemProps = {

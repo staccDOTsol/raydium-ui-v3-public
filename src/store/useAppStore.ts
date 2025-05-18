@@ -12,7 +12,7 @@ import {
   TokenInfo,
   DEV_LAUNCHPAD_PROGRAM,
   DEV_LAUNCHPAD_AUTH
-} from '@raydium-io/raydium-sdk-v2'
+} from 'stacc-sdk-v2'
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
 import { Wallet } from '@solana/wallet-adapter-react'
 import createStore from './createStore'

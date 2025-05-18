@@ -1,5 +1,5 @@
 import { Box, Divider, Grid, GridItem, Text, HStack, Switch } from '@chakra-ui/react'
-import { JupTokenType } from '@raydium-io/raydium-sdk-v2'
+import { JupTokenType } from 'stacc-sdk-v2'
 import { useEvent } from '@/hooks/useEvent'
 import { useAppStore, useTokenStore, USER_ADDED_KEY } from '@/store'
 import { colors } from '@/theme/cssVariables'

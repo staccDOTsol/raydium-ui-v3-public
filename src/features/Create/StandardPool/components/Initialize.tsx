@@ -15,7 +15,7 @@ import {
   solToWSol,
   CREATE_CPMM_POOL_PROGRAM,
   ApiV3PoolInfoStandardItemCpmm
-} from '@raydium-io/raydium-sdk-v2'
+} from 'stacc-sdk-v2'
 import { DatePick, HourPick, MinutePick } from '@/components/DateTimePicker'
 import DecimalInput from '@/components/DecimalInput'
 import Button from '@/components/Button'

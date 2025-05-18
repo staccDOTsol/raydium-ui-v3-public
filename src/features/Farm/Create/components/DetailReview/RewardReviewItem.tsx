@@ -4,7 +4,7 @@ import { parseDateInfo } from '@/utils/date'
 import { formatCurrency } from '@/utils/numberish/formatter'
 import { Box, HStack, SimpleGrid, Text } from '@chakra-ui/react'
 import { NewRewardInfo } from '@/features/Farm/Create/type'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 import { Desktop, Mobile } from '@/components/MobileDesktop'
 
 type RewardReviewItemProps = {

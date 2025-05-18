@@ -1,5 +1,5 @@
 import { useState, useCallback, forwardRef } from 'react'
-import { TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { TokenInfo } from 'stacc-sdk-v2'
 import { useTranslation } from 'react-i18next'
 import { useEvent } from '@/hooks/useEvent'
 import ChevronLeftIcon from '@/icons/misc/ChevronLeftIcon'

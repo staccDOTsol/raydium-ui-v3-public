@@ -1,4 +1,4 @@
-import { updateReqHistory } from '@raydium-io/raydium-sdk-v2'
+import { updateReqHistory } from 'stacc-sdk-v2'
 import { toastSubject } from '@/hooks/toast/useGlobalToast'
 import i18n from '@/i18n'
 import axios from 'axios'
@@ -67,12 +67,6 @@ axiosInstance.interceptors.response.use(
       }
     }
 
-    if (!config.skipError)
-      toastSubject.next({
-        title: i18n.t('error.api_error'),
-        description: status || error.message,
-        status: 'error'
-      })
 
     const errorMsg = response.data?.msg || error.message || ''
     if (config.authTokenCheck && (errorMsg.includes('token check error') || errorMsg.includes('token expired'))) {

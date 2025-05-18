@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import shallow from 'zustand/shallow'
 import axios from '@/api/axios'
-import { ApiStakePool, FetchPoolParams, ApiV3PageIns } from '@raydium-io/raydium-sdk-v2'
+import { ApiStakePool, FetchPoolParams, ApiV3PageIns } from 'stacc-sdk-v2'
 import { useAppStore } from '@/store'
 
 const fetcher = ([url]: [url: string]) => axios.get<ApiV3PageIns<ApiStakePool>>(url, { skipError: true })

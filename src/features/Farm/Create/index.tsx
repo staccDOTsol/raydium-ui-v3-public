@@ -1,5 +1,5 @@
 import { Box, Flex, Grid, GridItem, HStack, Link, Text, useDisclosure } from '@chakra-ui/react'
-import { ApiV3PoolInfoConcentratedItem, ApiV3PoolInfoItem, ApiV3PoolInfoStandardItem } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3PoolInfoConcentratedItem, ApiV3PoolInfoItem, ApiV3PoolInfoStandardItem } from 'stacc-sdk-v2'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -83,7 +83,7 @@ export default function CreateFarm() {
     () => formattedData?.filter((p) => p.id !== defaultPoolRef.current) || [],
     [formattedData]
   ) as ApiV3PoolInfoConcentratedItem[]
-  const createdPools = allCreatedPools.filter((p) => p.rewardDefaultInfos.length === 0)
+  const createdPools = allCreatedPools.filter((p) => p.rewardDefaultInfos?.length === 0)
 
   const handleCreateFarm = useEvent(() => {
     onSending()

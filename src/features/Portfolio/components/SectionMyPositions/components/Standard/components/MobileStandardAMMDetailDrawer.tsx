@@ -26,7 +26,7 @@ import StandardPoolAPR from '../ItemDetail/StandardPoolAPR'
 import StandardPoolRowStakeFarmHoldItem from './StandardPoolRowStakeFarmHoldItem'
 import StandardPoolRowStakeFarmItem from './StandardPoolRowStakeFarmItem'
 import { FarmBalanceInfo } from '@/hooks/farm/type'
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 import TokenAvatarPair from '@/components/TokenAvatarPair'
 
 export default function MobileStandardAMMDetailDrawer({

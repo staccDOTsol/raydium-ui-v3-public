@@ -11,7 +11,7 @@ import {
   ApiStakePool,
   CreateFarmExtInfo,
   IdoKeysData
-} from '@raydium-io/raydium-sdk-v2'
+} from 'stacc-sdk-v2'
 import { PublicKey } from '@solana/web3.js'
 import { toastSubject } from '@/hooks/toast/useGlobalToast'
 import { txStatusSubject } from '@/hooks/toast/useTxStatus'

@@ -11,7 +11,7 @@ import {
   useColorMode,
   useDisclosure
 } from '@chakra-ui/react'
-import { ApiV3Token, TokenInfo, SOL_INFO } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, TokenInfo, SOL_INFO } from 'stacc-sdk-v2'
 import { NumericFormat } from 'react-number-format'
 import Decimal from 'decimal.js'
 import React, { ReactNode, useEffect, useState, useRef, useMemo, useImperativeHandle, RefObject } from 'react'

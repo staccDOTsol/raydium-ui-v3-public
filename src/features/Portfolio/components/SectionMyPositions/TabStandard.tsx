@@ -1,4 +1,4 @@
-import { RAYMint } from '@raydium-io/raydium-sdk-v2'
+import { RAYMint } from 'stacc-sdk-v2'
 import { Flex, Text, Link, Button, Skeleton } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 import StandardPoolRowItem from './components/Standard/StandardPoolRowItem'

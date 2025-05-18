@@ -12,7 +12,7 @@ import {
   CpmmConfigInfoLayout,
   ApiCpmmConfigInfo,
   CpmmLockExtInfo
-} from '@raydium-io/raydium-sdk-v2'
+} from 'stacc-sdk-v2'
 import { PublicKey } from '@solana/web3.js'
 import createStore from './createStore'
 import { useAppStore } from './useAppStore'
@@ -31,6 +31,7 @@ import BN from 'bn.js'
 import Decimal from 'decimal.js'
 import { getComputeBudgetConfig } from '@/utils/tx/computeBudget'
 import { useTokenAccountStore } from './useTokenAccountStore'
+import ToPublicKey from '@/utils/publicKey'
 
 export const LIQUIDITY_SLIPPAGE_KEY = '_r_lqd_slippage_'
 
@@ -162,67 +163,136 @@ export const useLiquidityStore = createStore<LiquidityStore>(
       const computeBudgetConfig = await getComputeBudgetConfig()
 
       const percentSlippage = new Percent((get().slippage * 10000).toFixed(0), 10000)
-      const rpcData = await raydium.cpmm.getRpcPoolInfo(params.poolInfo.id)
-
-      const computeResult = raydium.cpmm.computePairAmount({
-        baseIn: params.baseIn,
-        amount: params.inputAmount,
-        slippage: new Percent(0),
-        epochInfo: (await getEpochInfo())!,
-        baseReserve: rpcData.baseReserve,
-        quoteReserve: rpcData.quoteReserve,
-        poolInfo: {
+      
+      try {
+        // Ensure poolId is a valid PublicKey
+        const poolId = params.poolInfo.id.toString()
+        
+        // Get pool information from RPC
+        const rpcData = await raydium.cpmm.getRpcPoolInfo(poolId)
+        
+        console.log("RPC Data fetched:", rpcData)
+        
+        // Get pool keys, which includes the authority
+        const poolKeys = await raydium.cpmm.getCpmmPoolKeys(poolId)
+        console.log("Pool keys:", poolKeys)
+        
+        // Process pool information to ensure all PublicKeys are properly formatted
+        const processedPoolInfo = {
           ...params.poolInfo,
-          lpAmount: new Decimal(rpcData.lpAmount.toString()).div(10 ** rpcData.lpDecimals).toNumber()
-        } as ApiV3PoolInfoStandardItemCpmm
-      })
-      const { execute } = await raydium.cpmm.addLiquidity({
-        ...params,
-        inputAmount: new BN(new Decimal(params.inputAmount).mul(10 ** params.poolInfo[baseIn ? 'mintA' : 'mintB'].decimals).toFixed(0)),
-        slippage: percentSlippage,
-        computeResult: {
-          ...computeResult,
-          liquidity: new Percent(new BN(1)).sub(percentSlippage).mul(computeResult.liquidity).quotient
-        },
-        txVersion,
-        computeBudgetConfig
-      })
-
-      const meta = getTxMeta({
-        action: 'addLiquidity',
-        values: {
-          amountA: formatLocaleStr(
-            baseIn ? params.inputAmount : params.anotherAmount,
-            params.poolInfo[baseIn ? 'mintA' : 'mintB'].decimals
-          )!,
-          symbolA: getMintSymbol({ mint: params.poolInfo.mintA, transformSol: true }),
-          amountB: formatLocaleStr(
-            baseIn ? params.anotherAmount : params.inputAmount,
-            params.poolInfo[baseIn ? 'mintB' : 'mintA'].decimals
-          )!,
-          symbolB: getMintSymbol({ mint: params.poolInfo.mintB, transformSol: true })
+          id: poolId
         }
-      })
+        
+        // Compute pair amount with the fetched RPC data
+        const computeResult = raydium.cpmm.computePairAmount({
+          baseIn: params.baseIn,
+          amount: params.inputAmount,
+          slippage: new Percent(0),
+          epochInfo: (await getEpochInfo())!,
+          baseReserve: rpcData.baseReserve,
+          quoteReserve: rpcData.quoteReserve,
+          poolInfo: {
+            ...processedPoolInfo,
+            lpAmount: new Decimal(rpcData.lpAmount.toString()).div(10 ** rpcData.lpDecimals).toNumber()
+          } as ApiV3PoolInfoStandardItemCpmm
+        })
+        
+        console.log("Compute result:", computeResult)
+        
+        // Ensure we're working with BN for input amount
+        const inputAmountBN = new BN(
+          new Decimal(params.inputAmount)
+            .mul(10 ** params.poolInfo[baseIn ? 'mintA' : 'mintB'].decimals)
+            .toFixed(0)
+        )
+        
+        console.log("Input amount BN:", inputAmountBN.toString())
+        console.log("Liquidity:", computeResult.liquidity.toString())
+        
+        // Execute the add liquidity transaction
+        const { execute } = await raydium.cpmm.addLiquidity({
+          poolInfo: processedPoolInfo,
+          poolKeys,
+          baseIn,
+          inputAmount: inputAmountBN,
+          slippage: percentSlippage,
+          computeResult: {
+            ...computeResult,
+            liquidity: new Percent(new BN(1)).sub(percentSlippage).mul(computeResult.liquidity).quotient
+          },
+          txVersion,
+          computeBudgetConfig
+        })
 
-      return execute()
-        .then(({ txId, signedTx }) => {
-          txStatusSubject.next({
-            txId,
-            ...meta,
-            signedTx,
-            mintInfo: [params.poolInfo.mintA, params.poolInfo.mintB],
-            onError,
-            onConfirmed: params.onConfirmed
+        const meta = getTxMeta({
+          action: 'addLiquidity',
+          values: {
+            amountA: formatLocaleStr(
+              baseIn ? params.inputAmount : params.anotherAmount,
+              params.poolInfo[baseIn ? 'mintA' : 'mintB'].decimals
+            )!,
+            symbolA: getMintSymbol({ mint: params.poolInfo.mintA, transformSol: true }),
+            amountB: formatLocaleStr(
+              baseIn ? params.anotherAmount : params.inputAmount,
+              params.poolInfo[baseIn ? 'mintB' : 'mintA'].decimals
+            )!,
+            symbolB: getMintSymbol({ mint: params.poolInfo.mintB, transformSol: true })
+          }
+        })
+
+        return execute()
+          .then(({ txId, signedTx }) => {
+            txStatusSubject.next({
+              txId,
+              ...meta,
+              signedTx,
+              mintInfo: [params.poolInfo.mintA, params.poolInfo.mintB],
+              onError,
+              onConfirmed: params.onConfirmed
+            })
+            onSent?.()
+            return txId
           })
-          onSent?.()
-          return txId
+          .catch((e) => {
+            console.error('CPMM Add Liquidity Error:', e)
+            onError?.()
+            
+            // Provide more detailed error messages for common issues
+            let errorDescription = 'Failed to add liquidity'
+            if (e.message) {
+              if (e.message.includes('not a valid PublicKey')) {
+                errorDescription = 'Invalid PublicKey in pool information. Please refresh and try again.'
+                console.error('PublicKey Error Details:', {
+                  poolId: params.poolInfo.id,
+                  mintA: params.poolInfo.mintA.address,
+                  mintB: params.poolInfo.mintB.address
+                })
+              } else if (e.message.includes('insufficient funds')) {
+                errorDescription = 'Insufficient funds to complete transaction'
+              } else {
+                errorDescription = e.message
+              }
+            }
+            
+            toastSubject.next({ 
+              ...meta, 
+              txError: e,
+              description: errorDescription 
+            })
+            return ''
+          })
+          .finally(onFinally)
+      } catch (e) {
+        console.error('CPMM Add Liquidity Preparation Error:', e)
+        onError?.()
+        toastSubject.next({ 
+          title: 'Add Liquidity Failed',
+          description: `Error preparing transaction: ${e instanceof Error ? e.message : 'Invalid pool configuration'}`,
+          status: 'error' 
         })
-        .catch((e) => {
-          onError?.()
-          toastSubject.next({ ...meta, txError: e })
-          return ''
-        })
-        .finally(onFinally)
+        onFinally?.()
+        return ''
+      }
     },
 
     addLiquidityAct: async ({ onSent, onError, onFinally, ...params }) => {
@@ -326,36 +396,86 @@ export const useLiquidityStore = createStore<LiquidityStore>(
       if (!raydium) return ''
       const { poolInfo, lpAmount, amountA, amountB } = params
       const computeBudgetConfig = await getComputeBudgetConfig()
-      const { execute } = await raydium.cpmm.withdrawLiquidity({
-        poolInfo,
-        lpAmount: new BN(lpAmount),
-        slippage: new Percent((get().slippage * 10000).toFixed(0), 10000),
-        txVersion,
-        computeBudgetConfig
-      })
-
-      const meta = getTxMeta({
-        action: 'removeLiquidity',
-        values: {
-          amountA: formatLocaleStr(amountA, params.poolInfo.mintA.decimals)!,
-          symbolA: getMintSymbol({ mint: params.poolInfo.mintA, transformSol: true }),
-          amountB: formatLocaleStr(amountB, params.poolInfo.mintB.decimals)!,
-          symbolB: getMintSymbol({ mint: params.poolInfo.mintB, transformSol: true })
+      
+      try {
+        // Ensure poolId is a valid PublicKey
+        const poolId = poolInfo.id.toString()
+        
+        // Get pool keys which includes the authority and other required PublicKey fields
+        const poolKeys = await raydium.cpmm.getCpmmPoolKeys(poolId)
+        console.log("Pool keys for removal:", poolKeys)
+        
+        // Process pool information to ensure all PublicKeys are properly formatted
+        const processedPoolInfo = {
+          ...poolInfo,
+          id: poolId
         }
-      })
+        
+        const { execute } = await raydium.cpmm.withdrawLiquidity({
+          poolInfo: processedPoolInfo,
+          poolKeys,
+          lpAmount: new BN(lpAmount),
+          slippage: new Percent((get().slippage * 10000).toFixed(0), 10000),
+          txVersion,
+          computeBudgetConfig
+        })
 
-      return execute()
-        .then(({ txId, signedTx }) => {
-          txStatusSubject.next({ txId, ...meta, signedTx, mintInfo: [params.poolInfo.mintA, params.poolInfo.mintB], onError })
-          onSent?.()
-          return txId
+        const meta = getTxMeta({
+          action: 'removeLiquidity',
+          values: {
+            amountA: formatLocaleStr(amountA, params.poolInfo.mintA.decimals)!,
+            symbolA: getMintSymbol({ mint: params.poolInfo.mintA, transformSol: true }),
+            amountB: formatLocaleStr(amountB, params.poolInfo.mintB.decimals)!,
+            symbolB: getMintSymbol({ mint: params.poolInfo.mintB, transformSol: true })
+          }
         })
-        .catch((e) => {
-          onError?.()
-          toastSubject.next({ ...meta, txError: e })
-          return ''
+
+        return execute()
+          .then(({ txId, signedTx }) => {
+            txStatusSubject.next({ txId, ...meta, signedTx, mintInfo: [params.poolInfo.mintA, params.poolInfo.mintB], onError })
+            onSent?.()
+            return txId
+          })
+          .catch((e) => {
+            console.error('CPMM Remove Liquidity Error:', e)
+            onError?.()
+            
+            // Provide more detailed error messages for common issues
+            let errorDescription = 'Failed to remove liquidity'
+            if (e.message) {
+              if (e.message.includes('not a valid PublicKey')) {
+                errorDescription = 'Invalid PublicKey in pool information. Please refresh and try again.'
+                console.error('PublicKey Error Details:', {
+                  poolId: params.poolInfo.id,
+                  mintA: params.poolInfo.mintA.address,
+                  mintB: params.poolInfo.mintB.address
+                })
+              } else if (e.message.includes('insufficient funds')) {
+                errorDescription = 'Insufficient funds to complete transaction'
+              } else {
+                errorDescription = e.message
+              }
+            }
+            
+            toastSubject.next({ 
+              ...meta, 
+              txError: e,
+              description: errorDescription 
+            })
+            return ''
+          })
+          .finally(onFinally)
+      } catch (e) {
+        console.error('CPMM Remove Liquidity Preparation Error:', e)
+        onError?.()
+        toastSubject.next({ 
+          title: 'Remove Liquidity Failed',
+          description: `Error preparing transaction: ${e instanceof Error ? e.message : 'Invalid pool configuration'}`,
+          status: 'error' 
         })
-        .finally(onFinally)
+        onFinally?.()
+        return ''
+      }
     },
 
     createPoolAct: async ({ pool, baseAmount, quoteAmount, startTime, onSent, onError, onFinally, onConfirmed }) => {

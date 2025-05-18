@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState, useRef, forwardRef, useImperativeHandle } from 'react'
-import { TokenInfo, WSOLMint } from '@raydium-io/raydium-sdk-v2'
+import { TokenInfo, WSOLMint } from 'stacc-sdk-v2'
 import { useTranslation } from 'react-i18next'
 import { PublicKey } from '@solana/web3.js'
 import { useEvent } from '@/hooks/useEvent'

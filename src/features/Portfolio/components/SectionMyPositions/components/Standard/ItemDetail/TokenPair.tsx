@@ -1,5 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react'
-import { TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { TokenInfo } from 'stacc-sdk-v2'
 
 import TokenAvatarPair from '@/components/TokenAvatarPair'
 import { colors } from '@/theme/cssVariables'

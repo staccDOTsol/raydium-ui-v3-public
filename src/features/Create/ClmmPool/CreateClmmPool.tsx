@@ -1,5 +1,5 @@
 import { Box, Flex, Grid, GridItem, HStack, Link, Text, useDisclosure } from '@chakra-ui/react'
-import { ApiClmmConfigInfo, ApiV3Token, solToWSol } from '@raydium-io/raydium-sdk-v2'
+import { ApiClmmConfigInfo, ApiV3Token, solToWSol } from 'stacc-sdk-v2'
 import { useCallback, useRef, useState } from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import shallow from 'zustand/shallow'

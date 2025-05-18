@@ -2,7 +2,7 @@ import axios from '@/api/axios'
 import { birdeyePriceUrl } from '@/utils/config/birdeyeAPI'
 import { MINUTE_MILLISECONDS } from '@/utils/date'
 import { isValidPublicKey } from '@/utils/publicKey'
-import { solToWSol, WSOLMint } from '@raydium-io/raydium-sdk-v2'
+import { solToWSol, WSOLMint } from 'stacc-sdk-v2'
 import { PublicKey } from '@solana/web3.js'
 import { useMemo } from 'react'
 import useSWR from 'swr'
@@ -37,7 +37,7 @@ export default function useBirdeyeTokenPrice(props: {
   const { mintList, refreshInterval = 2 * MINUTE_MILLISECONDS } = props || {}
 
   const readyList = useMemo(
-    () => Array.from(new Set(mintList.filter((m) => !!m && isValidPublicKey(m)).map((m) => solToWSol(m!).toString()))),
+    () => Array.from(new Set(mintList?.filter((m) => !!m && isValidPublicKey(m)).map((m) => solToWSol(m!).toString()))),
     [JSON.stringify(mintList)]
   )
 

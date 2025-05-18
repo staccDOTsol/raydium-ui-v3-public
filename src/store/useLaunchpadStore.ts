@@ -19,7 +19,7 @@ import {
   LaunchpadConfig,
   FEE_RATE_DENOMINATOR,
   ApiV3Token
-} from '@raydium-io/raydium-sdk-v2'
+} from 'stacc-sdk-v2'
 import axios from '@/api/axios'
 import { MintInfo } from '@/features/Launchpad/type'
 import { refreshChartSubject } from '@/components/TradingView/TVChart'

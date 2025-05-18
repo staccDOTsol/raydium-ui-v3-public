@@ -1,4 +1,4 @@
-import { ApiV3Token } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token } from 'stacc-sdk-v2'
 import { wSolToSolString } from '@/utils/token'
 
 export const transformSymbol = (symbols: ApiV3Token[]) => {

@@ -1,5 +1,5 @@
 import { useState, useImperativeHandle, useCallback, RefObject } from 'react'
-import { TokenInfo } from '@raydium-io/raydium-sdk-v2'
+import { TokenInfo } from 'stacc-sdk-v2'
 import ExistFarmingRewardItem from './FarmingRewardItem'
 import { EditReward } from '../util'
 

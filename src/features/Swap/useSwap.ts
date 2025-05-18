@@ -1,4 +1,4 @@
-import { TxVersion, solToWSol } from '@raydium-io/raydium-sdk-v2'
+import { TxVersion, solToWSol } from 'stacc-sdk-v2'
 import axios from '@/api/axios'
 import { useAppStore } from '@/store'
 import { useSwapStore } from './useSwapStore'

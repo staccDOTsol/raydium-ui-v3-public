@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react'
-import { CREATE_CPMM_POOL_PROGRAM } from '@raydium-io/raydium-sdk-v2'
+import { CREATE_CPMM_POOL_PROGRAM } from 'stacc-sdk-v2'
 import useFetchAccLpMint from '@/hooks/token/useFetchAccLpMint'
 import useFetchPoolByLpMint from '@/hooks/pool/useFetchPoolByLpMint'
 import Decimal from 'decimal.js'

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { PublicKey, GetProgramAccountsFilter } from '@solana/web3.js'
-import { ApiV3Token, liquidityStateV4Layout, liquidityStateV5Layout } from '@raydium-io/raydium-sdk-v2'
+import { ApiV3Token, liquidityStateV4Layout, liquidityStateV5Layout } from 'stacc-sdk-v2'
 
 import { useAppStore } from '@/store'
 import { MINUTE_MILLISECONDS } from '@/utils/date'

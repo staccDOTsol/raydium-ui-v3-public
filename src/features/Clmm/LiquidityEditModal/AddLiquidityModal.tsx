@@ -15,7 +15,7 @@ import {
   ModalOverlay,
   HStack
 } from '@chakra-ui/react'
-import { solToWSol } from '@raydium-io/raydium-sdk-v2'
+import { solToWSol } from 'stacc-sdk-v2'
 import shallow from 'zustand/shallow'
 
 import { FormattedPoolInfoConcentratedItem } from '@/hooks/pool/type'
