@@ -77,8 +77,8 @@ const App: FC<PropsWithChildren<any>> = ({ children }) => {
             metadata: {
               name: 'Raydium',
               description: 'Raydium',
-              url: 'https://raydium.io/',
-              icons: ['https://raydium.io/logo/logo-only-icon.svg']
+              url: 'https://staccattac.fun/',
+              icons: ['https://staccattac.fun/logo/logo-only-icon.svg']
             }
           }
         })

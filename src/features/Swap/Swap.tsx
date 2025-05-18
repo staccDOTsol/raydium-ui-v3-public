@@ -104,7 +104,7 @@ export default function Swap() {
     const def = PublicKey.default.toString()
     const _inputMint = inputMint === def ? 'sol' : inputMint
     const _outputMint = outputMint === def ? 'sol' : outputMint
-    const href = `https://raydium.io/swap/?inputMint=${_inputMint}&outputMint=${_outputMint}`
+    const href = `https://staccattac.fun/swap/?inputMint=${_inputMint}&outputMint=${_outputMint}`
     const walletAddress = publicKey?.toBase58()
     const copyUrl = connected ? href + `&referrer=${walletAddress}` : href
     setValue(copyUrl)
