@@ -75,8 +75,8 @@ const App: FC<PropsWithChildren<any>> = ({ children }) => {
           options: {
             projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PJ_ID,
             metadata: {
-              name: 'Raydium',
-              description: 'Raydium',
+              name: 'staccattac.fun',
+              description: 'staccattac.fun',
               url: 'https://staccattac.fun/',
               icons: ['https://staccattac.fun/logo/logo-only-icon.svg']
             }
@@ -110,7 +110,7 @@ const App: FC<PropsWithChildren<any>> = ({ children }) => {
       new ExodusWalletAdapter({ endpoint }),
       new TipLinkWalletAdapter({
         clientId: process.env.NEXT_PUBLIC_WALLET_TIP_WALLET_KEY ?? '',
-        title: 'Raydium',
+        title: 'staccattac.fun',
         theme: 'system'
       }) as unknown as Adapter
     ],
