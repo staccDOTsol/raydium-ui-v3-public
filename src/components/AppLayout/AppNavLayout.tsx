@@ -54,6 +54,15 @@ function AppNavLayout({
 
   return (
     <Flex direction="column" id="app-layout" height="full" overflow={overflowHidden ? 'hidden' : 'auto'}>
+      <Box bg={colors.primary} color="white" textAlign="center" py={1} fontSize="sm">
+        Check out the $attac token on{' '}
+        <Link
+          href="https://axiom.trade/meme/2n47n76b4FxKnKT2wn4tXQk2EWKawzpH8nWCyVxAriyX/@raycc"
+          isExternal
+        >
+          axiom.trade
+        </Link>
+      </Box>
       <HStack
         className="navbar"
         flex="none"
